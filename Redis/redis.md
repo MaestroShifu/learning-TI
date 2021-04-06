@@ -17,3 +17,7 @@ Redis es un almacén de estructura de datos de valores de clave en memoria rápi
 * Limitacion de velocidad.
 * Colas
 * Chat y mensajeria.
+
+## Ejemplo de implementacion
+
+![Imagen de implementacion](./resources/redis-diagrama.png)
