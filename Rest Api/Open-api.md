@@ -2,6 +2,7 @@
 Las especificaciones `OAS` establece un marco comun para los diseñadores, desarrolladores y testers sobre como construir y mantener las `APIs`.
 
 [Herramientas para OpenAPI desarrollo](https://openapi.tools/)
+![Ejemplo de OpenAPI](./resources/openapi.json)
 
 ## Estructura de OpenAPI
 

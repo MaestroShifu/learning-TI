@@ -1,0 +1,357 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Test API",
+    "description": "Esto es una prueba de una implementacion de OpenAPI",
+    "contact": {
+      "name": "MaestroShifu",
+      "url": "https://github.com/MaestroShifu",
+      "email": "sdanielsarsantos@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "ManageUser",
+      "description": "Administra todos usuarios de la plataforma"
+    }
+  ],
+  "servers": [
+    {
+      "url": "https://{host}:{port}/api/{basePath}",
+      "description": "Development server",
+      "variables": {
+        "host": {
+          "default": "localhost"
+        },
+        "port": {
+          "enum": [
+            "3000"
+          ],
+          "default": "3000"
+        },
+        "basePath": {
+          "default": "v1"
+        }
+      }
+    },
+    {
+      "url": "https://staging.com/api/v1",
+      "description": "Staging server"
+    },
+    {
+      "url": "https://api.production.com/api/v1",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": [
+          "ManageUser"
+        ],
+        "summary": "Listar los usuarios.",
+        "description": "Trae todos los usuarios que posee la plataforma.",
+        "operationId": "showUsers",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/showUsers"
+          },
+          "400": {
+            "$ref": "#/components/responses/generalError"
+          },
+          "500": {
+            "$ref": "#/components/responses/generalError"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ManageUser"
+        ],
+        "summary": "Crear usuario",
+        "description": "Sirve para crear un usuario nuevo en la plataforma.",
+        "operationId": "createUser",
+        "parameters": [],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/createOrUpdateUser"
+        },
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/getUser"
+          },
+          "400": {
+            "$ref": "#/components/responses/generalError"
+          },
+          "500": {
+            "$ref": "#/components/responses/generalError"
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "tags": [
+          "ManageUser"
+        ],
+        "summary": "Traer usuario por id.",
+        "description": "Trae un usuario consultado por id.",
+        "operationId": "getUserById",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/idPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/getUser"
+          },
+          "400": {
+            "$ref": "#/components/responses/generalError"
+          },
+          "500": {
+            "$ref": "#/components/responses/generalError"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ManageUser"
+        ],
+        "summary": "Actualiza un usuario por id.",
+        "description": "Actualiza un usuario consultado por id.",
+        "operationId": "updateUser",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/idPath"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/createOrUpdateUser"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/getUser"
+          },
+          "400": {
+            "$ref": "#/components/responses/generalError"
+          },
+          "500": {
+            "$ref": "#/components/responses/generalError"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ManageUser"
+        ],
+        "summary": "Elimina un usuario por id.",
+        "description": "Elimina un usuario consultado por id.",
+        "operationId": "deleteUser",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/idPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/deleteUser"
+          },
+          "400": {
+            "$ref": "#/components/responses/generalError"
+          },
+          "500": {
+            "$ref": "#/components/responses/generalError"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "idPath": {
+        "name": "id",
+        "in": "path",
+        "description": "Id por medio del path Url",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "schemas": {
+      "generalError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "200",
+              "204",
+              "400",
+              "500"
+            ],
+            "description": "Codigo de error del servidor"
+          },
+          "message": {
+            "type": "string",
+            "description": "Mensaje del error"
+          }
+        }
+      },
+      "user": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Es la id del usuario"
+          },
+          "name": {
+            "type": "string",
+            "description": "Es el nombre del usuario"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "Es el apellido del usuario"
+          },
+          "age": {
+            "type": "integer",
+            "description": "Es la edad del usuario"
+          }
+        }
+      },
+      "userBody": {
+        "type": "object",
+        "required": [
+          "name",
+          "age"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Es la id del usuario"
+          },
+          "name": {
+            "type": "string",
+            "description": "Es el nombre del usuario"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "Es el apellido del usuario"
+          },
+          "age": {
+            "type": "integer",
+            "description": "Es la edad del usuario"
+          }
+        }
+      },
+      "delete": {
+        "type": "boolean",
+        "description": "Sirve para validar si se elimino el registro."
+      }
+    },
+    "responses": {
+      "generalError": {
+        "description": "Respuesta de los errores",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/generalError"
+            }
+          }
+        }
+      },
+      "showUsers": {
+        "description": "Respuesta satisfactoria.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/user"
+              }
+            },
+            "examples": {
+              "listUsers": {
+                "$ref": "#/components/examples/listUsers"
+              }
+            }
+          }
+        }
+      },
+      "getUser": {
+        "description": "Respuesta satisfactoria.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/user"
+            },
+            "examples": {
+              "user": {
+                "$ref": "#/components/examples/user"
+              }
+            }
+          }
+        }
+      },
+      "deleteUser": {
+        "description": "Respuesta satisfactoria.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/delete"
+            }
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "createOrUpdateUser": {
+        "description": "Data para crear o actualizar usuario",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/userBody"
+            }
+          }
+        }
+      }
+    },
+    "examples": {
+      "user": {
+        "summary": "Ejemplo de usuario",
+        "value": {
+          "id": 1,
+          "name": "Daniel",
+          "lastName": "Santos",
+          "age": 23
+        }
+      },
+      "listUsers": {
+        "summary": "Ejemplo de lista de usuarios",
+        "value": [
+          {
+            "id": 1,
+            "name": "Daniel",
+            "lastName": "Santos",
+            "age": 23
+          },
+          {
+            "id": 2,
+            "name": "Maestro",
+            "lastName": "Shifu",
+            "age": 19
+          }
+        ]
+      }
+    },
+    "securitySchemes": {},
+    "links": {},
+    "callbacks": {}
+  }
+}
