@@ -2,7 +2,6 @@
 Las especificaciones `OAS` establece un marco comun para los diseñadores, desarrolladores y testers sobre como construir y mantener las `APIs`.
 
 [Herramientas para OpenAPI desarrollo](https://openapi.tools/)
-![Ejemplo de OpenAPI](./resources/openapi.json)
 
 ## Estructura de OpenAPI
 
@@ -14,6 +13,7 @@ Las especificaciones `OAS` establece un marco comun para los diseñadores, desar
 * **EXTERNAL DOCS:** Permite hacer referencia a documentacion externa para facilitar el consumo y la integracion con el `API`.
 * **COMPONENTS:** Son objetos que pueden contener un conjunto de objetos reutilizables durante el diseño del `API`.
 ![Estructura open api](./resources/open-api-estructura.png)
+![Ejemplo de OpenAPI](./resources/openapi.json)
 
 ## Orden de OpenAPI
 
